@@ -1,0 +1,12 @@
+# Dependencies
+node_modules/
+
+# Playwright results
+playwright-report/
+test-results/
+blob-report/
+
+# Local environment files
+.env
+.env.*
+!.env.example
