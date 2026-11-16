@@ -11,7 +11,7 @@ if (!['dev', 'qa'].includes(environment)) {
 const envFile = path.resolve(__dirname, `.env.${environment}`);
 const result = dotenv.config({ path: envFile });
 
-if (result.error) {
+if (result.error && !process.env.API_BASE_URL) {
   throw result.error;
 }
 

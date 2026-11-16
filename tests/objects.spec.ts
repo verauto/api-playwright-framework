@@ -1,6 +1,6 @@
 import { test, expect } from '../fixtures/api.fixture';
 
-test('[Positive] JAPI-15: GET /objects returns a non-empty list', async ({ usersClient }) => {
+test('[Positive] JAPI-15: GET /objects returns a non-empty list', { tag: '@smoke' }, async ({ usersClient }) => {
   const response = await usersClient.getAllObjects();
 
   expect(response.ok()).toBe(true);
