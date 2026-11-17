@@ -1,9 +1,7 @@
 name: API Smoke Tests
 
 on:
-  push:
-    branches:
-      - '**'
+  workflow_dispatch:
 
 permissions:
   contents: read
