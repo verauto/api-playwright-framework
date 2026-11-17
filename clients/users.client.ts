@@ -6,4 +6,8 @@ export class UsersClient {
   async getAllObjects() {
     return this.request.get('/objects');
   }
+
+  async getObjectById(id: string) {
+    return this.request.get('/objects/' + encodeURIComponent(id));
+  }
 }
