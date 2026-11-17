@@ -28,7 +28,7 @@ uploaded. Artifacts are retained for 7 days.
 Enable Settings > Pages > Build and deployment > Source > GitHub Actions
 in the GitHub repository once.
 
-After a push to main, the workflow publishes the latest Allure report at:
+After a manual run on main, the workflow publishes the latest Allure report at:
 https://verauto.github.io/api-playwright-framework/
 
 Reports from other branches remain downloadable artifacts and do not overwrite
@@ -38,3 +38,9 @@ the previous published report remains available.
 
 The site is public. Do not include credentials or private data in test reports.
 The site shows the latest deployed run; cross-run history is not configured.
+
+## Manual execution
+
+Pushes do not start tests. To run smoke tests, open GitHub Actions > API Smoke
+Tests > Run workflow, choose the branch, then click Run workflow.
+Choose main to also update the online Allure report.
