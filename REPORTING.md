@@ -23,4 +23,18 @@ The workflow generates reports even when tests fail. A failed test still fails
 the workflow. Raw Allure results and the Playwright HTML report are also
 uploaded. Artifacts are retained for 7 days.
 
-Cross-run history and public report hosting are not configured.
+## Online report
+
+Enable Settings > Pages > Build and deployment > Source > GitHub Actions
+in the GitHub repository once.
+
+After a push to main, the workflow publishes the latest Allure report at:
+https://verauto.github.io/api-playwright-framework/
+
+Reports from other branches remain downloadable artifacts and do not overwrite
+the published main report. A failed smoke test can still publish its report;
+the test job remains failed. If no report was generated, publication fails and
+the previous published report remains available.
+
+The site is public. Do not include credentials or private data in test reports.
+The site shows the latest deployed run; cross-run history is not configured.

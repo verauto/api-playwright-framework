@@ -58,3 +58,38 @@ jobs:
           name: playwright-smoke-report
           path: playwright-report/
           retention-days: 7
+  publish-report:
+    name: Publish Allure to GitHub Pages
+    needs: smoke
+    if: ${{ !cancelled() && github.ref == 'refs/heads/main' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      actions: read
+      contents: read
+      pages: write
+      id-token: write
+    concurrency:
+      group: github-pages
+      cancel-in-progress: false
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Download Allure report
+        uses: actions/download-artifact@v5
+        with:
+          name: allure-smoke-report
+          path: allure-report
+
+      - name: Configure GitHub Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: allure-report/awesome
+
+      - name: Deploy report
+        id: deployment
+        uses: actions/deploy-pages@v4
