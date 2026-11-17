@@ -31,6 +31,26 @@ jobs:
       - name: Run smoke tests only
         run: npm run test:smoke
 
+      - name: Generate Allure report
+        if: ${{ !cancelled() }}
+        run: npm run report:generate
+
+      - name: Upload Allure report
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v5
+        with:
+          name: allure-smoke-report
+          path: allure-report/
+          retention-days: 7
+
+      - name: Upload Allure raw results
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v5
+        with:
+          name: allure-smoke-results
+          path: allure-results/
+          retention-days: 7
+
       - name: Upload test report
         if: ${{ !cancelled() }}
         uses: actions/upload-artifact@v5

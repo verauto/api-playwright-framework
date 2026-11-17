@@ -10,3 +10,7 @@ blob-report/
 .env
 .env.*
 !.env.example
+
+# Allure reports
+allure-results/
+allure-report/
