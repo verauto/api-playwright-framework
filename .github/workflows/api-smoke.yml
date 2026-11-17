@@ -85,10 +85,23 @@ jobs:
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v5
 
+      - name: Locate report entry point
+        id: report
+        shell: bash
+        run: |
+          if [ -f allure-report/index.html ]; then
+            echo "path=allure-report" >> "$GITHUB_OUTPUT"
+          elif [ -f allure-report/awesome/index.html ]; then
+            echo "path=allure-report/awesome" >> "$GITHUB_OUTPUT"
+          else
+            echo "::error::Allure index.html was not found"
+            exit 1
+          fi
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v4
         with:
-          path: allure-report/awesome
+          path: ${{ steps.report.outputs.path }}
 
       - name: Deploy report
         id: deployment
